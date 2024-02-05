@@ -19,6 +19,8 @@ builder.Services.AddKeyedScoped<IRandomService, RandomService>("randomScoped");
 builder.Services.AddKeyedTransient<IRandomService, RandomService>("randomTransient");
 
 builder.Services.AddScoped<IPostsService, PostsService>();
+
+builder.Services.AddScoped<IBeerService, BeerService>();
  
 //HttpClient servicio jsonplaceholder
 builder.Services.AddHttpClient<IPostsService, PostsService>(c =>
