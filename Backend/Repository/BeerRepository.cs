@@ -33,5 +33,8 @@ namespace Backend.Repository
         public async Task Save()
             => await _storeContext.SaveChangesAsync();
 
+        public IEnumerable<Beer> Search(Func<Beer, bool> filter) =>
+            _storeContext.Beers.Where(filter).ToList();
+
     }
 }
