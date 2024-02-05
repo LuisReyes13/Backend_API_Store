@@ -1,5 +1,6 @@
 using Backend.DTOs;
 using Backend.Models;
+using Backend.Repository;
 using Backend.Services;
 using Backend.Validators;
 using FluentValidation;
@@ -21,12 +22,15 @@ builder.Services.AddKeyedTransient<IRandomService, RandomService>("randomTransie
 builder.Services.AddScoped<IPostsService, PostsService>();
 
 builder.Services.AddKeyedScoped<ICommonService<BeerDto, BeerInsertDto, BeerUpdateDto>, BeerService>("beerService");
- 
+
 //HttpClient servicio jsonplaceholder
 builder.Services.AddHttpClient<IPostsService, PostsService>(c =>
 {
     c.BaseAddress = new Uri(builder.Configuration["BaseUrlPosts"]);
 });
+
+// Repository
+builder.Services.AddScoped<IRepository<Beer>, BeerRepository>();
 
 // Entity Framwork
 builder.Services.AddDbContext<StoreContext>(options =>
